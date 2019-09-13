@@ -8,7 +8,7 @@ public class Barrel : MonoBehaviour {
     private LineRenderer lineRenderer;
     private Transform shootPoint;
     private MiningLaser parent;
-    private float shotLengthSeconds = 2, timeLastShot, maxLineWidth = 0.1f;
+    private float shotLengthSeconds = 2, timeLastShot;
     private float damage;
 
     void Start() {

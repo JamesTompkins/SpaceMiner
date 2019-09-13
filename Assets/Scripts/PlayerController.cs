@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     private MountPoint[] mountPoints; //all of the transforms defined as mount points
     private Asteroid target;
     private TargetSymbol targetSymbol;
+    MovementController movementController;
 
     void Start() {
         InitializeVariables();
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour {
         mountPoints = GetComponentsInChildren<MountPoint>();
         //initializing size of laser storage
         lasers = new MiningLaser[mountPoints.Length];
+
+        movementController = GetComponent<MovementController>();
 
         //finding UI elements
         cooldownPanel = GameObject.Find("CooldownPanel");
@@ -55,7 +58,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         //mouse 0 pressed - target closest
-        if (Input.GetAxis("Target") > 0) {
+        if (Input.GetMouseButtonDown(0)) {
             TargetClicked();
         }
     }
@@ -89,6 +92,7 @@ public class PlayerController : MonoBehaviour {
     void setTarget(Asteroid asteroid) {
         targetSymbol.gameObject.SetActive(true);
         targetSymbol.setTarget(asteroid.gameObject, asteroid.maxDimension);
+        movementController.targetPosition = asteroid.transform.position;
         target = asteroid;
     }
 
