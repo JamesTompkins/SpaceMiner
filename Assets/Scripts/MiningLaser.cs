@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MiningLaser : MonoBehaviour {
+public class MiningLaser : Mount {
     public float damagePerBarrel = 10;
     public float width;
 
     private Slider healthBar;
-    public Asteroid target;
     private Barrel[] barrels;
     private PlayerController playerController;
 
@@ -26,12 +25,13 @@ public class MiningLaser : MonoBehaviour {
     }
 
     //function called when laser is fired
-    public void Fire(Asteroid asteroid) {
-        if (!firing && asteroid.gameObject) {
-            target = asteroid;
+    public override void Fire(Target targetedObj) {
+        Debug.Log("Firing at " + targetedObj);
+        if (!firing && targetedObj.gameObject) {
+            target = targetedObj;
             firing = true;
 
-            healthBar.maxValue = asteroid.maxHealth;
+            healthBar.maxValue = targetedObj.maxHealth;
 
             StartLaser();
         }
@@ -41,6 +41,7 @@ public class MiningLaser : MonoBehaviour {
         if (!firing) {
             return;
         }
+        Debug.Log("Firing");
 
         //time since last shot
         float timeSinceLastShot = Time.time - timeLastShot;

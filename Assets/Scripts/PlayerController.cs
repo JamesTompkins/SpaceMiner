@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
     //general private variables
     private MiningLaser[] lasers; //all the laser components
     private MountPoint[] mountPoints; //all of the transforms defined as mount points
-    private Asteroid target;
+    private Target target;
     private TargetSymbol targetSymbol;
     MovementController movementController;
 
@@ -68,18 +68,18 @@ public class PlayerController : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)) {
             if (hit.collider.tag == "Clickable") {
-                setTarget(hit.collider.GetComponent<Asteroid>());
+                setTarget(hit.collider.GetComponent<Target>());
             }
         }
     }
 
     void TargetClosest() {
         float leastDistance = float.MaxValue;
-        Asteroid[] asteroids = FindObjectsOfType<Asteroid>();
+        Target[] target = FindObjectsOfType<Target>();
 
         //searching for closest asteroid
-        for (int i = 0; i < asteroids.Length; i++) {
-            Asteroid asteroid = asteroids[i];
+        for (int i = 0; i < target.Length; i++) {
+            Target asteroid = target[i];
             float currentDistance = Vector3.Distance(transform.position, asteroid.transform.position);
 
             if (currentDistance < leastDistance) {
@@ -89,11 +89,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
     
-    void setTarget(Asteroid asteroid) {
+    void setTarget(Target target) {
         targetSymbol.gameObject.SetActive(true);
-        targetSymbol.setTarget(asteroid.gameObject, asteroid.maxDimension);
-        movementController.targetPosition = asteroid.transform.position;
-        target = asteroid;
+        targetSymbol.setTarget(target.gameObject, target.size);
+        movementController.targetPosition = target.transform.position;
+        this.target = target;
     }
 
     void Mine() {

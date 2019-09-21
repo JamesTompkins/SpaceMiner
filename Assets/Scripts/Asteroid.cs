@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour {
-
-    public float health, maxStartingHealth, minStartingHealth, maxHealth, maxDimension;
+public class Asteroid : Target {
+    public float maxStartingHealth, minStartingHealth;
     public GameObject particles;
 
     private Vector3 startingScale;
@@ -12,6 +11,7 @@ public class Asteroid : MonoBehaviour {
     public Vector3 rotation;
 
     void Start() {
+        //randomizing size and rotation
         Quaternion offset = new Quaternion {
             x = Random.Range(0f, 1f),
             y = Random.Range(0f, 1f),
@@ -31,11 +31,11 @@ public class Asteroid : MonoBehaviour {
         startingScale.z = Random.Range(0.8f, 2.5f);
 
         CapsuleCollider collider = GetComponent<CapsuleCollider>();
-        maxDimension = Mathf.Max(collider.radius, collider.height);
+        size = Mathf.Max(collider.radius, collider.height);
 
         transform.localScale = startingScale;
-        health = Random.Range(minStartingHealth, maxStartingHealth);
-        maxHealth = health;
+        maxHealth = Random.Range(minStartingHealth, maxStartingHealth);
+        health = maxHealth;
     }
 
     void Update() {
@@ -44,7 +44,7 @@ public class Asteroid : MonoBehaviour {
 
 
     //returns if the asteroid was destroyed
-    public bool Mine(float amount) {
+    public override bool Damage(float amount) {
         if (amount > health) {
             amount = health;
         }

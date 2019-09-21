@@ -43,21 +43,20 @@ public class Barrel : MonoBehaviour {
         //in case laser hits something before asteroid
         RaycastHit hit;
         bool rayHit = Physics.Raycast(shootPoint.position, -transform.up, out hit);
-        Asteroid asteroidHit = null;
+        Target targetHit = null;
 
         if (!rayHit) {
-            asteroidHit = parent.target;
+            targetHit = parent.target;
         }
 
         //the point where the raycast hit, not neccessarily an asteroid
-        Debug.Log(hit.transform.gameObject);
-        asteroidHit = hit.transform.GetComponent<Asteroid>();
+        targetHit = hit.transform.GetComponent<Target>();
 
         //if object hit is asteroid, damage it
-        if (asteroidHit) {
+        if (targetHit) {
             float damagePerFrame = damage / shotLengthSeconds * Time.deltaTime;
-            //Debug.Log(asteroidHit.Mine(damagePerFrame) + " " + asteroidHit.transform.position);
-            if (asteroidHit.Mine(damagePerFrame)) {
+            bool destroyed = targetHit.Damage(damagePerFrame);
+            if (destroyed) {
                 Deactivate();
                 return;
             }

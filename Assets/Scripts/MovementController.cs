@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour {
-    public float rotationSpeed = 70;
     public static float maxSpeed = 15;
     const float rotationSpeedAuto = 0.05f;
     float moveSpeed = 0;
@@ -49,12 +48,5 @@ public class MovementController : MonoBehaviour {
             Quaternion target = Quaternion.LookRotation(targetPosition - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, target, rotationSpeedAuto);
         }
-
-        //character manual rotation
-        //Vector3 rotation = new Vector3();
-        //rotation.y += Input.GetAxis("Horizontal") * rotationSpeed;
-
-        //rotation *= Time.deltaTime;
-        //ship.Rotate(rotation);
     }
 }
