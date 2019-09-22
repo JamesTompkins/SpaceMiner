@@ -1,8 +1,8 @@
-#Space Miner
+# Space Miner
 
 This Unity project is a demonstration of user interface and modularity in a space themed game.
 
-#Credits:
+# Credits:
 
 Asteroids: https://assetstore.unity.com/packages/3d/props/asteroid-pack-by-pixel-make-83951
 
