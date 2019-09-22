@@ -4,10 +4,10 @@ This Unity project is a demonstration of user interface and modularity in a spac
 
 #Credits:
 
-Asteroids: https://assetstore.unity.com/packages/3d/props/asteroid-pack-by-pixel-make-83951
+[Asteroids](https://assetstore.unity.com/packages/3d/props/asteroid-pack-by-pixel-make-83951)
 
-Modular ships: https://assetstore.unity.com/packages/3d/vehicles/space/star-sparrow-modular-spaceship-73167
+[Modular ships](https://assetstore.unity.com/packages/3d/vehicles/space/star-sparrow-modular-spaceship-73167)
 
-Skybox: http://alexcpeterson.com/spacescape/ 
+[Skybox](http://alexcpeterson.com/spacescape/)
 
-Sun texture: http://www.textures4photoshop.com/tex/clouds-and-sky/sun-texture-seamless.aspx 
+[Sun texture](http://www.textures4photoshop.com/tex/clouds-and-sky/sun-texture-seamless.aspx) 

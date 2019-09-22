@@ -30,7 +30,6 @@ public class AsteroidCreator : MonoBehaviour {
                 ++counter;
             }
         }
-        //Debug.Log(counter + " Asteroids created");
     }
 
     void OnDrawGizmos() {

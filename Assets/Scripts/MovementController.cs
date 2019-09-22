@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour {
     public static float maxSpeed = 15;
-    const float rotationSpeedAuto = 0.05f;
+    const float rotationSpeedAuto = 0.05f, maxObjectDistance = 10;
     float moveSpeed = 0;
     public Vector3 targetPosition = Vector3.zero;
 
@@ -28,10 +28,13 @@ public class MovementController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
         //TODO: raycast ahead too slow when close
+        Vector3 offset = targetPosition - transform.position;
+        float distanceBasedSpeed = Mathf.Abs(maxObjectDistance -  Vector3.Magnitude(offset));
 
         //back and forth motion
         moveSpeed += Input.GetAxis("Vertical") / 5;
-        moveSpeed = Mathf.Clamp(moveSpeed, 0, maxSpeed);
+        float distanceSpeed = Mathf.Min(distanceBasedSpeed, maxSpeed);
+        moveSpeed = Mathf.Clamp(moveSpeed, 0, distanceSpeed);
         speedBar.setSpeedBar(moveSpeed);
 
         Vector3 motion = new Vector3();
@@ -45,7 +48,7 @@ public class MovementController : MonoBehaviour {
 
         //character auto rotation
         if (autoToggle.isOn) {
-            Quaternion target = Quaternion.LookRotation(targetPosition - transform.position);
+            Quaternion target = Quaternion.LookRotation(offset);
             transform.rotation = Quaternion.Lerp(transform.rotation, target, rotationSpeedAuto);
         }
     }

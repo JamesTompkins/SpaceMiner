@@ -26,7 +26,6 @@ public class MiningLaser : Mount {
 
     //function called when laser is fired
     public override void Fire(Target targetedObj) {
-        Debug.Log("Firing at " + targetedObj);
         if (!firing && targetedObj.gameObject) {
             target = targetedObj;
             firing = true;
@@ -41,7 +40,6 @@ public class MiningLaser : Mount {
         if (!firing) {
             return;
         }
-        Debug.Log("Firing");
 
         //time since last shot
         float timeSinceLastShot = Time.time - timeLastShot;
